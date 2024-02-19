@@ -5,6 +5,5 @@ package com.bhf.map;
  */
 public interface MapPutBenchmark {
 
-	void benchPut();
-
+    void benchPut();
 }

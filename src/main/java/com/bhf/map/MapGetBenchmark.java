@@ -5,6 +5,5 @@ package com.bhf.map;
  */
 public interface MapGetBenchmark {
 
-	void benchGet();
-
+    void benchGet();
 }

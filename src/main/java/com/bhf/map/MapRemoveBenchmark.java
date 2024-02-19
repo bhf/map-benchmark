@@ -5,6 +5,5 @@ package com.bhf.map;
  */
 public interface MapRemoveBenchmark {
 
-	void benchRemove();
-
+    void benchRemove();
 }

@@ -5,10 +5,9 @@ package com.bhf;
  */
 public interface MapFunctionalityTest {
 
-	public void testPut();
-	
-	public void testGet();
-	
-	public void testRemove();
-	
+    public void testPut();
+
+    public void testGet();
+
+    public void testRemove();
 }
