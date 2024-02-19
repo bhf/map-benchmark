@@ -1,3 +1,4 @@
+package com.bhf;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -5,13 +6,10 @@ import org.junit.jupiter.api.Test;
  */
 public interface MapFunctionalityTest {
 
-	@Test
 	public void testPut();
 	
-	@Test
 	public void testGet();
 	
-	@Test
 	public void testRemove();
 	
 }
