@@ -1,4 +1,4 @@
-package com.bhf;
+package com.bhf.map;
 
 /**
  * Benchmark get operations

@@ -1,4 +1,4 @@
-package com.bhf;
+package com.bhf.map;
 
 /**
  * Combined functionality to be implemented by the different
