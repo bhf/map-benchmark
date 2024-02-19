@@ -28,7 +28,7 @@ public class JMHResultLoader {
                 JSONObject el = (JSONObject) testDets.get(i);
                 JSONObject primaryMetric = (JSONObject) el.get("primaryMetric");
                 String primaryScoreVal = primaryMetric.get("score").toString();
-                BigDecimal primScore = new BigDecimal(primaryScoreVal);
+                double primScore = Double.parseDouble(primaryScoreVal);
                 JSONObject secondaryMetrics = (JSONObject) el.get("secondaryMetrics");
                 JSONObject params = (JSONObject) el.get("params");
                 String benchmark = el.get("benchmark").toString();
