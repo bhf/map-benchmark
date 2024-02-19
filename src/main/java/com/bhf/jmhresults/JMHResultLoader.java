@@ -2,7 +2,6 @@ package com.bhf.jmhresults;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.simple.JSONArray;
@@ -13,8 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JMHResultLoader {
-	
-	Logger logger=LoggerFactory.getLogger(getClass());
+
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     public List<JMHResult> getJMHResults(String jsonFile) {
 
@@ -37,10 +36,10 @@ public class JMHResultLoader {
             }
 
         } catch (IOException e) {
-        	logger.error("Got IOException on file: "+jsonFile,e);
+            logger.error("Got IOException on file: " + jsonFile, e);
             throw new RuntimeException(e);
         } catch (ParseException e) {
-        	logger.error("Got ParseException on file: "+jsonFile,e);
+            logger.error("Got ParseException on file: " + jsonFile, e);
             throw new RuntimeException(e);
         }
 
