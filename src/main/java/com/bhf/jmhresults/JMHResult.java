@@ -12,8 +12,15 @@ public class JMHResult {
 	public final JSONObject params;
 
 	public JMHResult(String benchmarkName, BigDecimal primaryScore, JSONObject secondaryScores, JSONObject params) {
-		super();
 		this.benchmarkName = benchmarkName;
+		
+		
+		
+		
+		
+		
+		
+		
 		this.primaryScore = primaryScore;
 		this.secondaryScores = secondaryScores;
 		this.params = params;
