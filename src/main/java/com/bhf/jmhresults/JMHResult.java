@@ -13,7 +13,6 @@ public class JMHResult {
     public double LLC_load_misses;
     public double L2_RQSTS_ALL_DEMAND_DATA_RD;
     public double STALLS_TOTAL;
-
     public double STALLS_L1D_MISS;
     public double STALLS_L2_MISS;
     public double STALLS_L3_MISS;
@@ -53,7 +52,6 @@ public class JMHResult {
     }
 
     private double getValue(JSONObject secondaryScores, String scoreKey) {
-
         if (secondaryScores.containsKey(scoreKey)) {
             return Double.parseDouble(secondaryScores.get(scoreKey).toString());
         }
