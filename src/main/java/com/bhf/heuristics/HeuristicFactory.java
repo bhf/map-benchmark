@@ -26,6 +26,9 @@ public class HeuristicFactory {
             case RATIO_THROUGHPUT_L1: {
                 return new RatioHeuristic(new ThroughputHeuristic(), new L1SummaryHeuristic());
             }
+            case RATIO_THROUGHPUT_L2: {
+                return new RatioHeuristic(new ThroughputHeuristic(), new L2SummaryHeuristic());
+            }
             default:
         }
 
