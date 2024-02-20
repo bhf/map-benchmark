@@ -18,31 +18,37 @@ public class JMHResultLoader {
     public List<JMHResult> getJMHResults(String jsonFile) {
 
         List<JMHResult> res = new ArrayList<JMHResult>();
-        JSONParser p = new JSONParser();
-        try {
-            Object parsed = p.parse(new FileReader(jsonFile));
-            JSONArray testDets = (JSONArray) parsed;
 
-            for (int i = 0; i < testDets.size(); i++) {
-                JSONObject el = (JSONObject) testDets.get(i);
-                JSONObject primaryMetric = (JSONObject) el.get("primaryMetric");
-                String primaryScoreVal = primaryMetric.get("score").toString();
-                double primScore = Double.parseDouble(primaryScoreVal);
-                JSONObject secondaryMetrics = (JSONObject) el.get("secondaryMetrics");
-                JSONObject params = (JSONObject) el.get("params");
-                String benchmark = el.get("benchmark").toString();
-                JMHResult r = new JMHResult(benchmark, primScore, secondaryMetrics, params);
-                res.add(r);
+        if (null != jsonFile && jsonFile.length() > 0) {
+            JSONParser p = new JSONParser();
+            try {
+                Object parsed = p.parse(new FileReader(jsonFile));
+                JSONArray testDets = (JSONArray) parsed;
+                processJMHJson(res, testDets);
+
+            } catch (IOException e) {
+                logger.error("Got IOException on file: " + jsonFile, e);
+                throw new RuntimeException(e);
+            } catch (ParseException e) {
+                logger.error("Got ParseException on file: " + jsonFile, e);
+                throw new RuntimeException(e);
             }
-
-        } catch (IOException e) {
-            logger.error("Got IOException on file: " + jsonFile, e);
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            logger.error("Got ParseException on file: " + jsonFile, e);
-            throw new RuntimeException(e);
         }
 
         return res;
+    }
+
+    void processJMHJson(List<JMHResult> res, JSONArray testDets) {
+        for (int i = 0; i < testDets.size(); i++) {
+            JSONObject el = (JSONObject) testDets.get(i);
+            JSONObject primaryMetric = (JSONObject) el.get("primaryMetric");
+            String primaryScoreVal = primaryMetric.get("score").toString();
+            double primScore = Double.parseDouble(primaryScoreVal);
+            JSONObject secondaryMetrics = (JSONObject) el.get("secondaryMetrics");
+            JSONObject params = (JSONObject) el.get("params");
+            String benchmark = el.get("benchmark").toString();
+            JMHResult r = new JMHResult(benchmark, primScore, secondaryMetrics, params);
+            res.add(r);
+        }
     }
 }
