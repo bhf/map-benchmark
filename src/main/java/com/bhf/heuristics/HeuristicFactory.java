@@ -17,6 +17,9 @@ public class HeuristicFactory {
             case RATIO_L1_L2: {
                 return new RatioHeuristic(new L1SummaryHeuristic(), new L2SummaryHeuristic());
             }
+            case RATIO_L1_L3: {
+                return new RatioHeuristic(new L1SummaryHeuristic(), new L3SummaryHeuristic());
+            }
             default:
         }
 
