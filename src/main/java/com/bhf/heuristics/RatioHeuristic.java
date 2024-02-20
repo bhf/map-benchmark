@@ -33,4 +33,12 @@ public class RatioHeuristic implements DerivedHeuristicCalculator {
     public double getHeuristicValue() {
         return heuristicVal;
     }
+
+    public DerivedHeuristicCalculator getNumerator() {
+        return numerator;
+    }
+
+    public DerivedHeuristicCalculator getDenominator() {
+        return denominator;
+    }
 }
