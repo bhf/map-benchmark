@@ -14,7 +14,14 @@ class JMHResultTest {
         JSONObject secondaryScore = null;
         JSONObject params = null;
         JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
-        jmhRes.parseSecondaryScores(secondaryScore);
+        try {
+			jmhRes.parseSecondaryScores(secondaryScore);
+			assert(true);	// no exception from null secondary score
+		} catch (Exception e) {
+			assert(false);
+			e.printStackTrace();
+		}
+        
     }
 
     @Test
@@ -38,11 +45,8 @@ class JMHResultTest {
         String benchmarkName = "TestHeuristic";
         double primaryScore = 100000;
         JSONObject secondaryScore = new JSONObject();
-        int stalls = 10000;
         JSONObject sc = new JSONObject();
-
         secondaryScore.put("CYCLE_ACTIVITY.STALLS_TOTAL", sc);
-
         JSONObject params = null;
         JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
         jmhRes.parseSecondaryScores(secondaryScore);
