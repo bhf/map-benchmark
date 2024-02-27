@@ -13,7 +13,7 @@ class ThroughputHeuristicTest {
     @Test
     void testMissingValues() {
         ThroughputHeuristic heuristicCalc = new ThroughputHeuristic();
-        String benchmarkName = "TestThroughputHeuristic";
+        String benchmarkName = "TestThroughputHeuristic"+heuristicCalc.getHeuristicName();
         double primaryScore = 0;
         JSONObject secondaryScore = null;
         JSONObject params = null;
