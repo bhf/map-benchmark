@@ -17,4 +17,10 @@ public class L1SummaryHeuristic implements DerivedHeuristicCalculator {
     public double getHeuristicValue() {
         return heuristicVal;
     }
+
+    @Override
+    public String getHeuristicName()
+    {
+        return "STALLS_L1D_MISS:L1_dcache_loads";
+    }
 }

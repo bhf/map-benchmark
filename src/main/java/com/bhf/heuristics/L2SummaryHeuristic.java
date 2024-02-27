@@ -17,4 +17,10 @@ public class L2SummaryHeuristic implements DerivedHeuristicCalculator {
     public double getHeuristicValue() {
         return heuristicVal;
     }
+
+    @Override
+    public String getHeuristicName()
+    {
+        return "STALLS_L2_MISS:CYCLES_L2_MISS";
+    }
 }

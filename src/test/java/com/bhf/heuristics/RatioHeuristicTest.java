@@ -8,13 +8,14 @@ import org.junit.jupiter.api.Test;
 
 class RatioHeuristicTest {
 
+    private static final String TEST_HEURISTIC = "TestHeuristic";
     private static final int HEURISTIC_DEFAULT_VALUE = 0;
 
     @Test
     void testMissingValues() {
         L3SummaryHeuristic numerator = new L3SummaryHeuristic();
         L2SummaryHeuristic denominator = new L2SummaryHeuristic();
-        RatioHeuristic heuristicCal = new RatioHeuristic(numerator, denominator);
+        RatioHeuristic heuristicCal = new RatioHeuristic(numerator, denominator,TEST_HEURISTIC);
 
         String benchmarkName = "TestRatioHeuristic";
         double primaryScore = 123.4;
@@ -30,7 +31,7 @@ class RatioHeuristicTest {
     void testKnownValues() {
         L3SummaryHeuristic numerator = new L3SummaryHeuristic();
         L2SummaryHeuristic denominator = new L2SummaryHeuristic();
-        RatioHeuristic heuristicCal = new RatioHeuristic(numerator, denominator);
+        RatioHeuristic heuristicCal = new RatioHeuristic(numerator, denominator,TEST_HEURISTIC);
 
         String benchmarkName = "TestRatioHeuristic";
         double primaryScore = 123.4;
@@ -52,7 +53,7 @@ class RatioHeuristicTest {
     void testNull() {
         L3SummaryHeuristic numerator = new L3SummaryHeuristic();
         L2SummaryHeuristic denominator = new L2SummaryHeuristic();
-        RatioHeuristic heuristicCal = new RatioHeuristic(numerator, denominator);
+        RatioHeuristic heuristicCal = new RatioHeuristic(numerator, denominator,TEST_HEURISTIC);
 
         JMHResult jmhRes = null;
         heuristicCal.calculateHeuristic(jmhRes);

@@ -17,4 +17,10 @@ public class L3SummaryHeuristic implements DerivedHeuristicCalculator {
     public double getHeuristicValue() {
         return heuristicVal;
     }
+    
+    @Override
+    public String getHeuristicName()
+    {
+        return "STALLS_L3_MISS:CYCLES_L3_MISS";
+    }
 }

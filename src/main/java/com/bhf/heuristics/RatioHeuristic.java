@@ -6,12 +6,14 @@ public class RatioHeuristic implements DerivedHeuristicCalculator {
 
     final DerivedHeuristicCalculator numerator;
     final DerivedHeuristicCalculator denominator;
+    final String name;
     double heuristicVal;
 
-    public RatioHeuristic(DerivedHeuristicCalculator numerator, DerivedHeuristicCalculator denominator) {
+    public RatioHeuristic(DerivedHeuristicCalculator numerator, DerivedHeuristicCalculator denominator, String heuristicName) {
         super();
         this.numerator = numerator;
         this.denominator = denominator;
+        this.name=heuristicName;
     }
 
     @Override
@@ -40,5 +42,11 @@ public class RatioHeuristic implements DerivedHeuristicCalculator {
 
     public DerivedHeuristicCalculator getDenominator() {
         return denominator;
+    }
+
+    @Override
+    public String getHeuristicName()
+    {
+        return name;
     }
 }
