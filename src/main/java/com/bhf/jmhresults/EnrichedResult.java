@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class EnrichedResult
 {
-    final JMHResult result;
+    public final JMHResult result;
     final HashMap<String,Double> heuristicsToValues=new HashMap<String, Double>();
     
     public EnrichedResult(JMHResult result)
