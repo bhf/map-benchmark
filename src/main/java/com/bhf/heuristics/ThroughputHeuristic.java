@@ -21,6 +21,6 @@ public class ThroughputHeuristic implements DerivedHeuristicCalculator {
     @Override
     public String getHeuristicName()
     {
-        return "PRIMARY";
+        return HeuristicType.THROUGHPUT.toString();
     }
 }

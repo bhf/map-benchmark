@@ -10,5 +10,5 @@ public enum HeuristicType {
     L1_SUMMARY,
     L2_SUMMARY,
     L3_SUMMARY,
-    THROUGHPUT_DISTRO
+    THROUGHPUT
 }

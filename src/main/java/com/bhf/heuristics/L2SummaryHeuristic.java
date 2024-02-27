@@ -21,6 +21,6 @@ public class L2SummaryHeuristic implements DerivedHeuristicCalculator {
     @Override
     public String getHeuristicName()
     {
-        return "STALLS_L2_MISS:CYCLES_L2_MISS";
+        return HeuristicType.L2_SUMMARY.toString();
     }
 }
