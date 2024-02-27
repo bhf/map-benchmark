@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class EnrichedResult
 {
     public final JMHResult result;
-    final HashMap<String,Double> heuristicsToValues=new HashMap<String, Double>();
+    public final HashMap<String,Double> heuristicsToValues=new HashMap<String, Double>();
     
     public EnrichedResult(JMHResult result)
     {

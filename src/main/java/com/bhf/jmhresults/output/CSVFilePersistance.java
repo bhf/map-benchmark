@@ -31,6 +31,7 @@ public class CSVFilePersistance implements ResultsPersistance
 
             StringBuilder sb = new StringBuilder();
             StringBuilder paramsHeaders=null;
+            StringBuilder heuristicHeaders=null;
             
             List<StringBuilder> sRes=new ArrayList<StringBuilder>();
             
@@ -75,8 +76,21 @@ public class CSVFilePersistance implements ResultsPersistance
                 sb.append(r.result.CYCLES_L3_MISS).append(CSV_SEPERATOR);
                 sb.append(r.result.STALLS_L1D_PENDING).append(CSV_SEPERATOR);
                 sb.append(r.result.STALLS_L2_PENDING).append(CSV_SEPERATOR);
-                sb.append(r.result.STALLS_LDM_PENDING).append(NEW_LINE);
+                sb.append(r.result.STALLS_LDM_PENDING).append(CSV_SEPERATOR);
                 
+                if(null==heuristicHeaders) {
+                    heuristicHeaders=new StringBuilder();
+                    
+                    for(String s: r.heuristicsToValues.keySet()) {
+                        heuristicHeaders.append(s).append(CSV_SEPERATOR); 
+                    }
+                }
+                
+                for(String s: r.heuristicsToValues.keySet()) {
+                    double val=r.heuristicsToValues.get(s);
+                    sb.append(val).append(CSV_SEPERATOR);
+                }
+                sb.append(NEW_LINE);
                 sRes.add(sb);
             }
             
@@ -96,12 +110,13 @@ public class CSVFilePersistance implements ResultsPersistance
             headers.append("CYCLES_L3_MISS").append(CSV_SEPERATOR);
             headers.append("STALLS_L1D_PENDING").append(CSV_SEPERATOR);
             headers.append("STALLS_L2_PENDING").append(CSV_SEPERATOR);
-            headers.append("STALLS_LDM_PENDING").append(CSV_SEPERATOR).append(NEW_LINE);
+            headers.append("STALLS_LDM_PENDING").append(CSV_SEPERATOR);
+            headers.append(heuristicHeaders.substring(0, heuristicHeaders.length() - 1)).append(NEW_LINE);
             
             out.write(headers.toString());
             
             for(StringBuilder s : sRes) {
-                out.write(s.toString());
+                out.write(s.substring(0, s.length()-1)+NEW_LINE);
             }
             out.close();
         }
