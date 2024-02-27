@@ -21,6 +21,7 @@ public class HeuristicsEnricher
             for (JMHResult r : results)
             {   
                 EnrichedResult er=new EnrichedResult(r);
+                res.add(er);
                 
                 for(HeuristicType h : HeuristicType.values()) {
                     DerivedHeuristicCalculator heuristic = heuristicFactory.getHeuristic(h);

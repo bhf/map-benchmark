@@ -21,6 +21,6 @@ public class L1SummaryHeuristic implements DerivedHeuristicCalculator {
     @Override
     public String getHeuristicName()
     {
-        return "STALLS_L1D_MISS:L1_dcache_loads";
+        return HeuristicType.L1_SUMMARY.toString();
     }
 }
