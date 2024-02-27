@@ -9,24 +9,9 @@ import java.util.List;
 import org.json.simple.JSONObject;
 
 import com.bhf.jmhresults.EnrichedResult;
-import com.bhf.jmhresults.HeuristicsEnricher;
-import com.bhf.jmhresults.JMHResult;
-import com.bhf.jmhresults.JMHResultLoader;
 
 public class CSVFilePersistance implements ResultsPersistance
-{
-    
-    public static void main(String[] args)
-    {
-        JMHResultLoader l=new JMHResultLoader();
-        List<JMHResult> jmhResults = l.getJMHResults("/home/optimus/hft/jmh-playground/CacheCalculatingAveragesMultiArray.json");
-        CSVFilePersistance p=new CSVFilePersistance("/tmp/sample.csv");
-        HeuristicsEnricher enricher=new HeuristicsEnricher();
-        List<EnrichedResult> enriched=enricher.getEnrichedResults(jmhResults);
-        p.persistEnrichedResults(enriched);
-    }
-    
-
+{  
     private static final Object CSV_SEPERATOR = ",";
     private static final String NEW_LINE = "\n";
     private String outputFile;
@@ -75,7 +60,10 @@ public class CSVFilePersistance implements ResultsPersistance
                     paramHeadersWritten=true;
                 }
 
-                sb.append(paramsBuilder.substring(0,paramsBuilder.length()-1)).append(CSV_SEPERATOR);
+                if(paramsBuilder.length()>0)
+                {
+                    sb.append(paramsBuilder.substring(0,paramsBuilder.length()-1)).append(CSV_SEPERATOR);
+                }
                 sb.append(r.result.L1_dcache_loads).append(CSV_SEPERATOR);
                 sb.append(r.result.LLC_loads).append(CSV_SEPERATOR);
                 sb.append(r.result.LLC_load_misses).append(CSV_SEPERATOR);
@@ -109,7 +97,7 @@ public class CSVFilePersistance implements ResultsPersistance
             StringBuilder headers=new StringBuilder();
             headers.append("BENCHMARK,PRIMARY_SCORE,");
             
-            if(null!=paramsHeaders)
+            if(paramsHeaders.length()>0)
             {
                 headers.append(paramsHeaders.substring(0,paramsHeaders.length()-1).toUpperCase()).append(CSV_SEPERATOR);
             }
@@ -128,7 +116,7 @@ public class CSVFilePersistance implements ResultsPersistance
             headers.append("STALLS_L2_PENDING").append(CSV_SEPERATOR);
             headers.append("STALLS_LDM_PENDING").append(CSV_SEPERATOR);
             
-            if(null!=heuristicHeaders)
+            if(heuristicHeaders.length()>0)
             {
                 headers.append(heuristicHeaders.substring(0, heuristicHeaders.length() - 1)).append(NEW_LINE);
             }
