@@ -9,9 +9,23 @@ import java.util.List;
 import org.json.simple.JSONObject;
 
 import com.bhf.jmhresults.EnrichedResult;
+import com.bhf.jmhresults.HeuristicsEnricher;
+import com.bhf.jmhresults.JMHResult;
+import com.bhf.jmhresults.JMHResultLoader;
 
 public class CSVFilePersistance implements ResultsPersistance
 {
+    
+    public static void main(String[] args)
+    {
+        JMHResultLoader l=new JMHResultLoader();
+        List<JMHResult> jmhResults = l.getJMHResults("/home/optimus/hft/jmh-playground/CacheCalculatingAveragesMultiArray.json");
+        CSVFilePersistance p=new CSVFilePersistance("/tmp/sample.csv");
+        HeuristicsEnricher enricher=new HeuristicsEnricher();
+        List<EnrichedResult> enriched=enricher.getEnrichedResults(jmhResults);
+        p.persistEnrichedResults(enriched);
+    }
+    
 
     private static final Object CSV_SEPERATOR = ",";
     private static final String NEW_LINE = "\n";
@@ -30,22 +44,20 @@ public class CSVFilePersistance implements ResultsPersistance
             BufferedWriter out = new BufferedWriter(fstream);
 
             StringBuilder sb = new StringBuilder();
-            StringBuilder paramsHeaders=null;
-            StringBuilder heuristicHeaders=null;
+            StringBuilder paramsHeaders = new StringBuilder();;
+            StringBuilder heuristicHeaders=new StringBuilder();
+            boolean paramHeadersWritten=false;
+            boolean heuristicHeadersWritten=false;
             
             List<StringBuilder> sRes=new ArrayList<StringBuilder>();
             
             for (EnrichedResult r : results)
             {
-                sb.append(r.result.benchmarkName);
-                sb.append(r.result.primaryScore);
+                sb.append(r.result.benchmarkName).append(CSV_SEPERATOR);
+                sb.append(r.result.primaryScore).append(CSV_SEPERATOR);
 
                 StringBuilder paramsBuilder = new StringBuilder();
                 
-                if(null==paramsHeaders)
-                {
-                    paramsHeaders = new StringBuilder();
-                }
                 JSONObject params = r.result.params;
 
                 if (null != params)
@@ -53,16 +65,17 @@ public class CSVFilePersistance implements ResultsPersistance
                     for (Object o : params.keySet())
                     {
                         String sm = params.get(o).toString();
-                        paramsBuilder.append(sm + ",");
+                        paramsBuilder.append(sm).append(CSV_SEPERATOR);
                         
-                        if(null!=paramsHeaders) {
+                        if(!paramHeadersWritten) {
                             paramsHeaders.append(o + ",");
                         }
                         
                     }
+                    paramHeadersWritten=true;
                 }
 
-                sb.append(paramsBuilder).append(CSV_SEPERATOR);
+                sb.append(paramsBuilder.substring(0,paramsBuilder.length()-1)).append(CSV_SEPERATOR);
                 sb.append(r.result.L1_dcache_loads).append(CSV_SEPERATOR);
                 sb.append(r.result.LLC_loads).append(CSV_SEPERATOR);
                 sb.append(r.result.LLC_load_misses).append(CSV_SEPERATOR);
@@ -78,12 +91,11 @@ public class CSVFilePersistance implements ResultsPersistance
                 sb.append(r.result.STALLS_L2_PENDING).append(CSV_SEPERATOR);
                 sb.append(r.result.STALLS_LDM_PENDING).append(CSV_SEPERATOR);
                 
-                if(null==heuristicHeaders) {
-                    heuristicHeaders=new StringBuilder();
-                    
+                if(!heuristicHeadersWritten) {
                     for(String s: r.heuristicsToValues.keySet()) {
                         heuristicHeaders.append(s).append(CSV_SEPERATOR); 
                     }
+                    heuristicHeadersWritten=true;
                 }
                 
                 for(String s: r.heuristicsToValues.keySet()) {
@@ -96,7 +108,11 @@ public class CSVFilePersistance implements ResultsPersistance
             
             StringBuilder headers=new StringBuilder();
             headers.append("BENCHMARK,PRIMARY_SCORE,");
-            headers.append(paramsHeaders.toString().toUpperCase()).append(CSV_SEPERATOR);
+            
+            if(null!=paramsHeaders)
+            {
+                headers.append(paramsHeaders.substring(0,paramsHeaders.length()-1).toUpperCase()).append(CSV_SEPERATOR);
+            }
             headers.append("L1_dcache_loads").append(CSV_SEPERATOR);
             headers.append("LLC_loads").append(CSV_SEPERATOR);
             headers.append("LLC_load_misses").append(CSV_SEPERATOR);
@@ -111,7 +127,11 @@ public class CSVFilePersistance implements ResultsPersistance
             headers.append("STALLS_L1D_PENDING").append(CSV_SEPERATOR);
             headers.append("STALLS_L2_PENDING").append(CSV_SEPERATOR);
             headers.append("STALLS_LDM_PENDING").append(CSV_SEPERATOR);
-            headers.append(heuristicHeaders.substring(0, heuristicHeaders.length() - 1)).append(NEW_LINE);
+            
+            if(null!=heuristicHeaders)
+            {
+                headers.append(heuristicHeaders.substring(0, heuristicHeaders.length() - 1)).append(NEW_LINE);
+            }
             
             out.write(headers.toString());
             
