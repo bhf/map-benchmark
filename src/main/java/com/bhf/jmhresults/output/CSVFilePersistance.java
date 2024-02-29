@@ -41,6 +41,18 @@ public class CSVFilePersistance implements ResultsPersistance
                 StringBuilder sb = new StringBuilder();
                 sb.append(r.result.benchmarkName).append(CSV_SEPERATOR);
                 sb.append(r.result.primaryScore).append(CSV_SEPERATOR);
+                
+                StringBuilder pctilesBuilder=new StringBuilder();
+                JSONObject pctiles=r.result.scorePctiles;
+                
+                String median=pctiles.containsKey("50.0") ? pctiles.get("50.0").toString() : "";
+                String p90=pctiles.containsKey("90.0") ? pctiles.get("90.0").toString() : "";
+                String p99=pctiles.containsKey("99.0") ? pctiles.get("99.0").toString() : "";
+                pctilesBuilder.append(median).append(CSV_SEPERATOR);
+                pctilesBuilder.append(p90).append(CSV_SEPERATOR);
+                pctilesBuilder.append(p99).append(CSV_SEPERATOR);
+                
+                sb.append(pctilesBuilder);
 
                 StringBuilder paramsBuilder = new StringBuilder();
                 
@@ -96,7 +108,7 @@ public class CSVFilePersistance implements ResultsPersistance
             }
             
             StringBuilder headers=new StringBuilder();
-            headers.append("BENCHMARK,PRIMARY_SCORE,");
+            headers.append("BENCHMARK,PRIMARY_SCORE,PRIM_MED,PRIM_P90,PRIM_P99,");
             
             if(paramsHeaders.length()>0)
             {
