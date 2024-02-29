@@ -28,7 +28,7 @@ public class CSVFilePersistance implements ResultsPersistance
         {
             BufferedWriter out = new BufferedWriter(fstream);
 
-            StringBuilder sb = new StringBuilder();
+            
             StringBuilder paramsHeaders = new StringBuilder();;
             StringBuilder heuristicHeaders=new StringBuilder();
             boolean paramHeadersWritten=false;
@@ -38,6 +38,7 @@ public class CSVFilePersistance implements ResultsPersistance
             
             for (EnrichedResult r : results)
             {
+                StringBuilder sb = new StringBuilder();
                 sb.append(r.result.benchmarkName).append(CSV_SEPERATOR);
                 sb.append(r.result.primaryScore).append(CSV_SEPERATOR);
 
