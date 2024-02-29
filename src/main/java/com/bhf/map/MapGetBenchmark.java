@@ -22,7 +22,7 @@ public interface MapGetBenchmark<K,V> {
      * annotated as @Setup(Level.*)
      * @param inputData
      */
-    void initMap(Map<K,V> inputData);
+    void initMap();
     
     void benchGet(Blackhole bh);
 }
