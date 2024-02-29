@@ -13,7 +13,8 @@ class JMHResultTest {
         double primaryScore = 100000;
         JSONObject secondaryScore = null;
         JSONObject params = null;
-        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
+        JSONObject pctiles = null;
+        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params, pctiles);
         try {
 			jmhRes.parseSecondaryScores(secondaryScore);
 			assert(true);	// no exception from null secondary score
@@ -35,7 +36,8 @@ class JMHResultTest {
         secondaryScore.put("CYCLE_ACTIVITY.STALLS_TOTAL", sc);
 
         JSONObject params = null;
-        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
+        JSONObject pctiles = null;
+        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params, pctiles);
         jmhRes.parseSecondaryScores(secondaryScore);
         assertEquals(jmhRes.STALLS_TOTAL, stalls);
     }
@@ -48,7 +50,8 @@ class JMHResultTest {
         JSONObject sc = new JSONObject();
         secondaryScore.put("CYCLE_ACTIVITY.STALLS_TOTAL", sc);
         JSONObject params = null;
-        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
+        JSONObject pctiles = null;
+        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params, pctiles);
         jmhRes.parseSecondaryScores(secondaryScore);
         assertEquals(jmhRes.STALLS_TOTAL, 0);
     }

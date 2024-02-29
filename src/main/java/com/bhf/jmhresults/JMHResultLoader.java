@@ -43,11 +43,17 @@ public class JMHResultLoader {
             JSONObject el = (JSONObject) testDets.get(i);
             JSONObject primaryMetric = (JSONObject) el.get("primaryMetric");
             String primaryScoreVal = primaryMetric.get("score").toString();
+            JSONObject scorePctiles=null;
+            
+            if(primaryMetric.containsKey("scorePercentiles")) {
+                scorePctiles = (JSONObject)primaryMetric.get("scorePercentiles");
+            }
+            
             double primScore = Double.parseDouble(primaryScoreVal);
             JSONObject secondaryMetrics = (JSONObject) el.get("secondaryMetrics");
             JSONObject params = (JSONObject) el.get("params");
             String benchmark = el.get("benchmark").toString();
-            JMHResult r = new JMHResult(benchmark, primScore, secondaryMetrics, params);
+            JMHResult r = new JMHResult(benchmark, primScore, secondaryMetrics, params, scorePctiles);
             res.add(r);
         }
     }

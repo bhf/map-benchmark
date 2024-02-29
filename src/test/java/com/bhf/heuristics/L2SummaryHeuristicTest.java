@@ -17,7 +17,8 @@ class L2SummaryHeuristicTest {
         double primaryScore = 123.4;
         JSONObject secondaryScore = null;
         JSONObject params = null;
-        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
+        JSONObject pctiles = null;
+        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params, pctiles);
         heuristicCalc.calculateHeuristic(jmhRes);
         double badVal = heuristicCalc.getHeuristicValue();
         assertTrue(HEURISTIC_DEFAULT_VALUE == badVal);
@@ -30,7 +31,8 @@ class L2SummaryHeuristicTest {
         double primaryScore = 123.4;
         JSONObject secondaryScore = null;
         JSONObject params = null;
-        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
+        JSONObject pctiles = null;
+        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params, pctiles);
         jmhRes.CYCLES_L2_MISS = 10;
         jmhRes.STALLS_L2_MISS = 5;
         heuristicCalc.calculateHeuristic(jmhRes);

@@ -22,12 +22,14 @@ public class JMHResult {
     public double STALLS_L1D_PENDING;
     public double STALLS_L2_PENDING;
     public double STALLS_LDM_PENDING;
+    public final JSONObject scorePctiles;
 
-    public JMHResult(String benchmarkName, double primaryScore, JSONObject secondaryScores, JSONObject params) {
+    public JMHResult(String benchmarkName, double primaryScore, JSONObject secondaryScores, JSONObject params, JSONObject scorePctiles) {
         this.benchmarkName = benchmarkName;
         this.primaryScore = primaryScore;
         this.secondaryScores = secondaryScores;
         this.params = params;
+        this.scorePctiles=scorePctiles;
 
         if (null != secondaryScores) {
             parseSecondaryScores(secondaryScores);

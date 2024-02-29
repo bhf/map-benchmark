@@ -31,7 +31,7 @@ class HeuristicsEnricherTest
     {
         HeuristicsEnricher enricher=new HeuristicsEnricher();
         ArrayList<JMHResult> res = new ArrayList<JMHResult>();
-        res.add(new JMHResult("BenchmarkTest", 1000, null, null));   
+        res.add(new JMHResult("BenchmarkTest", 1000, null, null, null));   
         List<EnrichedResult> enrichedResults = enricher.getEnrichedResults(res);
         assertNotNull(enrichedResults);
     }
