@@ -2,6 +2,8 @@ package com.bhf.map;
 
 import java.util.Map;
 
+import org.openjdk.jmh.infra.Blackhole;
+
 /**
  * Benchmark put operations
  */
@@ -20,11 +22,11 @@ public interface MapPutBenchmark<K,V> {
      * annotated as @Setup(Level.*)
      * @param inputData
      */
-    void initMap(Map<K,V> inputData);
+    void initMap();
     
     /**
      * Put operation on the map implementation being
      * benchmarked - must be annotated as @Benchmark
      */
-    void benchPut();
+    void benchPut(Blackhole bh);
 }
