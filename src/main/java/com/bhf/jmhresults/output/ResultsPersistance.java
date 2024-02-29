@@ -8,6 +8,6 @@ import com.bhf.jmhresults.JMHResult;
 public interface ResultsPersistance
 {
 
-    public void persistEnrichedResults(List<EnrichedResult> results);
+    public void persistEnrichedResults(List<EnrichedResult> results, String meta);
     
 }

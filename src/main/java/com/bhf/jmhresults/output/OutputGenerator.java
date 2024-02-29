@@ -14,6 +14,7 @@ public class OutputGenerator
     {
         String jmhResultsFile=args[0];
         String outputCSV=args[1];
+        String libVersion=args[2];
         JMHResultLoader l=new JMHResultLoader();
         List<JMHResult> jmhResults = l.getJMHResults(jmhResultsFile);
         System.out.println("Total results="+jmhResults.size());
@@ -21,7 +22,7 @@ public class OutputGenerator
         HeuristicsEnricher enricher=new HeuristicsEnricher();
         List<EnrichedResult> enriched=enricher.getEnrichedResults(jmhResults);
         System.out.println("Enriched results="+jmhResults.size());
-        p.persistEnrichedResults(enriched);
+        p.persistEnrichedResults(enriched,libVersion);
     }
     
 }

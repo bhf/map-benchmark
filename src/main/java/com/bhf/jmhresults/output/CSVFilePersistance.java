@@ -22,7 +22,7 @@ public class CSVFilePersistance implements ResultsPersistance
     }
 
     @Override
-    public void persistEnrichedResults(List<EnrichedResult> results)
+    public void persistEnrichedResults(List<EnrichedResult> results, String libVersion)
     {
         try (FileWriter fstream = new FileWriter(outputFile))
         {
@@ -40,6 +40,7 @@ public class CSVFilePersistance implements ResultsPersistance
             {
                 StringBuilder sb = new StringBuilder();
                 sb.append(r.result.benchmarkName).append(CSV_SEPERATOR);
+                sb.append(libVersion).append(CSV_SEPERATOR);
                 sb.append(r.result.primaryScore).append(CSV_SEPERATOR);
                 
                 StringBuilder pctilesBuilder=new StringBuilder();
@@ -108,7 +109,7 @@ public class CSVFilePersistance implements ResultsPersistance
             }
             
             StringBuilder headers=new StringBuilder();
-            headers.append("BENCHMARK,PRIMARY_SCORE,PRIM_MED,PRIM_P90,PRIM_P99,");
+            headers.append("BENCHMARK,VERSION,PRIMARY_SCORE,PRIM_MED,PRIM_P90,PRIM_P99,");
             
             if(paramsHeaders.length()>0)
             {
