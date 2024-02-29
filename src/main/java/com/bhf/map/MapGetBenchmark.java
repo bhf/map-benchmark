@@ -2,6 +2,8 @@ package com.bhf.map;
 
 import java.util.Map;
 
+import org.openjdk.jmh.infra.Blackhole;
+
 /**
  * Benchmark get operations
  */
@@ -22,5 +24,5 @@ public interface MapGetBenchmark<K,V> {
      */
     void initMap(Map<K,V> inputData);
     
-    void benchGet();
+    void benchGet(Blackhole bh);
 }
