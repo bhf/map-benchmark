@@ -21,7 +21,8 @@ class RatioHeuristicTest {
         double primaryScore = 123.4;
         JSONObject secondaryScore = null;
         JSONObject params = null;
-        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
+        JSONObject pctiles = null;
+        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params, pctiles);
         heuristicCal.calculateHeuristic(jmhRes);
         double badVal = heuristicCal.getHeuristicValue();
         assertTrue(HEURISTIC_DEFAULT_VALUE == badVal);
@@ -37,7 +38,8 @@ class RatioHeuristicTest {
         double primaryScore = 123.4;
         JSONObject secondaryScore = null;
         JSONObject params = null;
-        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
+        JSONObject pctiles = null;
+        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params, pctiles);
         jmhRes.CYCLES_L3_MISS = 100;
         jmhRes.STALLS_L3_MISS = 50;
 

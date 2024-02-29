@@ -17,7 +17,8 @@ class ThroughputHeuristicTest {
         double primaryScore = 0;
         JSONObject secondaryScore = null;
         JSONObject params = null;
-        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
+        JSONObject pctiles = null;
+        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params, pctiles);
         heuristicCalc.calculateHeuristic(jmhRes);
         double badVal = heuristicCalc.getHeuristicValue();
         assertTrue(HEURISTIC_DEFAULT_VALUE == badVal);
@@ -30,7 +31,8 @@ class ThroughputHeuristicTest {
         double primaryScore = 123.4;
         JSONObject secondaryScore = null;
         JSONObject params = null;
-        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params);
+        JSONObject pctiles = null;
+        JMHResult jmhRes = new JMHResult(benchmarkName, primaryScore, secondaryScore, params, pctiles);
         jmhRes.STALLS_L1D_MISS = 1;
         jmhRes.L1_dcache_loads = 1;
         heuristicCalc.calculateHeuristic(jmhRes);

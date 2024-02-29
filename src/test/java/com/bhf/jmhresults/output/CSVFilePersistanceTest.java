@@ -24,7 +24,7 @@ class CSVFilePersistanceTest
         CSVFilePersistance p=new CSVFilePersistance("/tmp/sample.csv");
         HeuristicsEnricher enricher=new HeuristicsEnricher();
         List<EnrichedResult> enriched=enricher.getEnrichedResults(jmhResults);
-        p.persistEnrichedResults(enriched);
+        p.persistEnrichedResults(enriched, "test-meta");
         
     }
     
@@ -36,7 +36,7 @@ class CSVFilePersistanceTest
         CSVFilePersistance p=new CSVFilePersistance("/tmp/sampleParams.csv");
         HeuristicsEnricher enricher=new HeuristicsEnricher();
         List<EnrichedResult> enriched=enricher.getEnrichedResults(jmhResults);
-        p.persistEnrichedResults(enriched);
+        p.persistEnrichedResults(enriched, "test-meta");
     }
 
 }
